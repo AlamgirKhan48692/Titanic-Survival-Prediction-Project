@@ -1,13 +1,10 @@
 import streamlit as st
 import pandas as pd
-import numpy as np
-from sklearn.linear_model import LinearRegression
-import matplotlib.pyplot as plt
+from sklearn.linear_model import LogisticRegression
 
-st.title("Bitcoin Price Prediction App")
+st.title("Titanic Survival Prediction App")
 
-# Upload dataset
-uploaded_file = st.file_uploader("Upload Bitcoin price dataset (CSV)", type="csv")
+uploaded_file = st.file_uploader("Upload Titanic Dataset CSV", type="csv")
 
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
@@ -15,51 +12,38 @@ if uploaded_file is not None:
     st.subheader("Dataset Preview")
     st.write(data.head())
 
-    # Show columns so user knows dataset structure
-    st.write("Columns in dataset:", list(data.columns))
+    data = data[['Pclass','Sex','Age','Fare','Survived']]
 
-    # Detect date column automatically
-    date_col = None
-    for col in data.columns:
-        if "date" in col.lower() or "time" in col.lower():
-            date_col = col
-            break
+    data['Sex'] = data['Sex'].map({'male':0,'female':1})
 
-    # Detect price column automatically
-    price_col = None
-    for col in data.columns:
-        if "close" in col.lower() or "price" in col.lower():
-            price_col = col
-            break
+    data = data.dropna()
 
-    if date_col is None or price_col is None:
-        st.error("Could not detect Date or Price column automatically. Please check your dataset.")
-    else:
-        # Convert date column
-        data[date_col] = pd.to_datetime(data[date_col])
+    X = data[['Pclass','Sex','Age','Fare']]
+    y = data['Survived']
 
-        # Convert to numeric timeline
-        data["Days"] = (data[date_col] - data[date_col].min()).dt.days
+    model = LogisticRegression()
+    model.fit(X,y)
 
-        X = data[["Days"]]
-        y = data[price_col]
+    st.subheader("Passenger Information")
 
-        # Train model
-        model = LinearRegression()
-        model.fit(X, y)
+    pclass = st.selectbox("Passenger Class", [1,2,3])
+    sex = st.selectbox("Sex", ["male","female"])
+    age = st.slider("Age",1,80,25)
+    fare = st.slider("Fare",1,500,50)
 
-        future_days = st.slider("Days in future for prediction", 1, 365, 30)
+    sex_val = 0 if sex=="male" else 1
 
-        future_value = model.predict([[data["Days"].max() + future_days]])
+    input_data = pd.DataFrame({
+        'Pclass':[pclass],
+        'Sex':[sex_val],
+        'Age':[age],
+        'Fare':[fare]
+    })
 
-        st.subheader("Predicted Bitcoin Price")
-        st.write(float(future_value[0]))
+    prediction = model.predict(input_data)
 
-        # Plot results
-        fig, ax = plt.subplots()
-        ax.scatter(X, y)
-        ax.plot(X, model.predict(X), color="red")
-        ax.set_xlabel("Days")
-        ax.set_ylabel("Bitcoin Price")
-
-        st.pyplot(fig)
+    if st.button("Predict Survival"):
+        if prediction[0]==1:
+            st.success("Passenger likely SURVIVED")
+        else:
+            st.error("Passenger likely DID NOT survive")
