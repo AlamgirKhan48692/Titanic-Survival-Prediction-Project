@@ -1,3 +1,7 @@
+Live Demo
+https://titanic-survival-prediction-project-fmnrzgmkvwcd8f6gpe5sgn.streamlit.app/
+
+
 📈 Bitcoin Price Prediction using Linear Regression
 
 This project builds a simple machine learning model to predict the next day's Bitcoin closing price using historical daily trading data. It involves data preprocessing, feature engineering, and training a linear regression model. The performance is evaluated using common regression metrics and visualized with Matplotlib.
