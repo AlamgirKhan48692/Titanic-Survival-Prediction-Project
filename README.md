@@ -1,108 +1,129 @@
-Live Demo
-https://titanic-survival-prediction-project-fmnrzgmkvwcd8f6gpe5sgn.streamlit.app/
+# 🚢 Titanic Survival Prediction App
 
+🌐 **Live Demo:**
+👉 https://titanic-survival-prediction-project-fmnrzgmkvwcd8f6gpe5sgn.streamlit.app/
 
-📈 Bitcoin Price Prediction using Linear Regression
+---
 
-This project builds a simple machine learning model to predict the next day's Bitcoin closing price using historical daily trading data. It involves data preprocessing, feature engineering, and training a linear regression model. The performance is evaluated using common regression metrics and visualized with Matplotlib.
+## 📌 Overview
 
-📂 Dataset
+This project is a **Machine Learning web app** built with Streamlit that predicts whether a passenger survived the Titanic disaster based on their information.
 
-The dataset consists of daily Bitcoin trading data with the following features:
+---
 
-Open Time: Timestamp of the trading day start
+## ✨ Features
 
-Open: Opening price
+* 📂 Upload Titanic dataset (CSV)
+* 📊 Preview dataset instantly
+* ⚙️ Select passenger inputs
+* 🤖 Predict survival using ML model
+* 📉 Clean and interactive UI
+* ⚡ Fast predictions with Streamlit
 
-High: Highest price of the day
+---
 
-Low: Lowest price of the day
+## 📂 Dataset Features
 
-Close: Closing price (used as target)
+The dataset includes:
 
-Volume: Trading volume for the day
+* **PassengerId**
+* **Survived** (Target)
+* **Pclass** (Passenger Class)
+* **Sex**
+* **Age**
+* **SibSp** (Siblings/Spouses)
+* **Parch** (Parents/Children)
+* **Fare**
+* **Embarked**
 
+---
 
-📥 Download Sample CSV from CryptoDataDownload
+## ⚙️ How It Works
 
-🔧 Features Used
+1. Upload Titanic dataset
+2. App processes data automatically
+3. Enter passenger details:
 
-The following features were selected for prediction:
+   * Class
+   * Gender
+   * Age
+   * Fare
+4. Model predicts:
+   👉 **Survived or Not Survived**
 
-Open
+---
 
-High
+## 🤖 Model Details
 
-Low
+* Algorithm: Logistic Regression / Classification Model
+* Input Features:
 
-Volume
+  * Pclass
+  * Sex
+  * Age
+  * Fare
+* Output:
 
-Target: Next day's Close price
+  * Survival Prediction
 
+---
 
-🚀 Workflow
+## 📸 Screenshots
 
-1. Load & Preprocess the Data
-Convert Open Time to datetime
+### 🏠 Home Page
 
-Sort by date
+<img src="Screenshots/home.png" width="800">
 
-Create Target column by shifting Close one day up
+---
 
-Drop last row with NaN
+### 📊 Dataset Preview
 
-2. Train-Test Split
-Use 80% for training, 20% for testing (no shuffle to maintain time sequence)
+<img src="Screenshots/dataset.png" width="800">
 
-3. Train Model
-python
-Copy
-Edit
+---
 
+### ⚙️ Passenger Input
 
-from sklearn.linear_model import LinearRegression
-5. Evaluate Model
-Metrics:
+<img src="Screenshots/input.png" width="800">
 
-MAE (Mean Absolute Error)
+---
 
-RMSE (Root Mean Squared Error)
+### 🎯 Prediction Result
 
-R² Score
+<img src="Screenshots/result.png" width="800">
 
-5. Visualize
-6. 
-Actual vs Predicted prices plotted using Matplotlib
+---
 
+## 📦 Installation
 
-📊 Evaluation Example
+```bash
+git clone https://github.com/AlamgirKhan48692/titanic-survival-prediction-project.git
+cd titanic-survival-prediction-project
+pip install -r requirements.txt
+streamlit run app.py
+```
 
-makefile
-Copy
-Edit
-MAE: 312.25
-RMSE: 408.33
-R²: 0.8724
+---
 
+## ⚠️ Note
 
-📌 Requirements
+* This model is for **educational purposes**
+* Accuracy depends on dataset quality
+* Not intended for real-world decision making
 
-Python 3.x
+---
 
-pandas
+## 🚀 Future Improvements
 
-numpy
+* Add more ML models (Random Forest, XGBoost)
+* Improve UI design
+* Add model comparison
+* Deploy with database
 
-matplotlib
+---
 
-scikit-learn
+## 👨‍💻 Author
 
-📸 Sample Output Plot
+**Alamgir Khan**
+📘 https://github.com/AlamgirKhan48692
 
-(optional if you generate a plot image)
-
-
-✍️ Author
-
-Alamgir Khan
-📘 GitHub Profile
